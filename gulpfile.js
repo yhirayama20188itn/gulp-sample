@@ -53,11 +53,11 @@ gulp.task('imagemin', function () {
       pngquant({
         quality: [0.7, 0.85],
         speed: 1
+      }),
+      mozjpeg({
+        quality: 85,
+        progressive: true
       })
-      // mozjpeg({
-      //   quality: 85,
-      //   progressive: true
-      // }),
       // imagemin.svgo(),
       // imagemin.gifsicle()
     ]
@@ -70,7 +70,6 @@ gulp.task('watch', function() {
   // gulp.watch("./src/*.html", ['bs-reload']);
   gulp.watch("src/sass/**/*.scss", gulp.task('sass'));
   gulp.watch("src/js/**/*.js", gulp.task('babel'));
-  // gulp.watch("./src/js/*.js", ['bs-reload']);
 })
 
 gulp.task('start', gulp.parallel('sass', 'babel', 'imagemin'));
