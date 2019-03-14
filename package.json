@@ -1,0 +1,25 @@
+{
+  "name": "gulp-test5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-babel": "^8.0.0"
+  }
+}
