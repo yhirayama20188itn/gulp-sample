@@ -1,12 +1,14 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('gulp-autoprefixer');
-var babel = require("gulp-babel");
-var imagemin = require('gulp-imagemin');
-var pngquant = require('imagemin-pngquant');
-var mozjpeg = require('imagemin-mozjpeg');
+const gulp = require('gulp');
+const browserSync = require('browser-sync');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const autoprefixer = require('gulp-autoprefixer');
+const babel = require("gulp-babel");
+const imagemin = require('gulp-imagemin');
+const pngquant = require('imagemin-pngquant');
+const mozjpeg = require('imagemin-mozjpeg');
+const svgo = require('imagemin-svgo');
+const gifsicle = require('imagemin-gifsicle');
 
 gulp.task('bs', function () {
   browserSync({
@@ -57,9 +59,9 @@ gulp.task('imagemin', function () {
       mozjpeg({
         quality: 85,
         progressive: true
-      })
-      // imagemin.svgo(),
-      // imagemin.gifsicle()
+      }),
+      imagemin.svgo(),
+      imagemin.gifsicle()
     ]
     ))
     .pipe(imagemin())
