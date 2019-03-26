@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var ejs = require('gulp-ejs');
 var rename = require('gulp-rename');
+var plumber = require('gulp-plumber');
 var fs = require("fs");
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -25,7 +26,7 @@ gulp.task('ejs', function () {
   return gulp.src(
     ['src/ejs/**/*.ejs', '!' + 'src/ejs/**/_*.ejs']
   )
-    // .pipe(plumber())
+    .pipe(plumber())
     .pipe(ejs({
       jsonData: json
     }))
