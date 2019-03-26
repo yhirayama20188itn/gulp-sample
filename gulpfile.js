@@ -1,5 +1,8 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
+var ejs = require('gulp-ejs');
+var rename = require('gulp-rename');
+var fs = require("fs");
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
@@ -14,6 +17,21 @@ gulp.task('bs', function () {
       baseDir: "./dist/"
     }
   });
+});
+
+gulp.task('ejs', function () {
+  const json_path = "src/data/test.json";
+  const json = JSON.parse(fs.readFileSync(json_path));
+  return gulp.src(
+    ['src/ejs/**/*.ejs', '!' + 'src/ejs/**/_*.ejs']
+  )
+    // .pipe(plumber())
+    .pipe(ejs({
+      jsonData: json
+    }))
+    .pipe(rename({ extname: '.html' }))
+    .pipe(gulp.dest('dist'))
+    .pipe(browserSync.reload({ stream: true }))
 });
 
 gulp.task('sass', function () {
@@ -66,12 +84,12 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('watch', function() {
-  // gulp.watch("./src/*.html", ['bs-reload']);
+gulp.task('watch', function () {
+  gulp.watch('src/ejs/**/*.ejs', gulp.task('ejs'));
   gulp.watch("src/sass/**/*.scss", gulp.task('sass'));
   gulp.watch("src/js/**/*.js", gulp.task('babel'));
   // gulp.watch("./src/js/*.js", ['bs-reload']);
 })
 
-gulp.task('start', gulp.parallel('sass', 'babel', 'imagemin'));
+gulp.task('start', gulp.parallel('ejs', 'sass', 'babel', 'imagemin'));
 gulp.task('default', gulp.parallel('bs', 'watch'));
